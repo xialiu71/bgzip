@@ -15,7 +15,7 @@ else:
     extra_compile_args = ["-O3", "-fopenmp"]
     extra_link_args = ["-fopenmp"]
 
-file_ext = "pyx" if os.environ.get("BUILD_WITH_CYTHON") else "c"
+file_ext = "pyx"
 extensions = [
     Extension(
         name="bgzip.bgzip_utils",
@@ -26,9 +26,8 @@ extensions = [
     )
 ]
 
-if os.environ.get("BUILD_WITH_CYTHON"):
-    from Cython.Build import cythonize
-    extensions = cythonize(extensions)
+from Cython.Build import cythonize
+extensions = cythonize(extensions)
 
 with open("README.md") as fh:
     long_description = fh.read()
